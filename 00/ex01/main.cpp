@@ -17,7 +17,7 @@ int main() {
     PhoneBook phonebook;
     std::string command;
 
-    std::cout << "Welcome to Your Awesome PhoneBook!\n";
+    std::cout << "Welcome to PhoneBook!\n";
     while (true) 
     {
         std::cout << "Enter command (ADD, SEARCH, EXIT): ";
@@ -39,7 +39,7 @@ int main() {
         } 
         else if (command == "EXIT") 
         {
-            std::cout << "Goodbye!\n";
+            std::cout << "Bye bye!\n";
             break;
         } 
         else 
