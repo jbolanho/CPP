@@ -44,7 +44,7 @@ Fixed::~Fixed()
 
 Fixed::Fixed(const int intNbr) 
 {
-    std::cout << "Int constructor called" << std::endl;
+    std::cout << "Integer constructor called" << std::endl;
     _value = intNbr << _fractionalBits;
 }
 
