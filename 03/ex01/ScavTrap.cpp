@@ -1,7 +1,7 @@
 
 #include "ScavTrap.hpp"
 
-ScavTrap::ScavTrap()
+ScavTrap::ScavTrap() : ClapTrap()
 {
     _name = "Default ScavTrap";
     _hitPoints = 100;
@@ -10,7 +10,7 @@ ScavTrap::ScavTrap()
     std::cout << "\033[1;33m" << "ScavTrap default constructor called for " << _name << std::endl;
 }
 
-ScavTrap::ScavTrap(const std::string &name)
+ScavTrap::ScavTrap(const std::string &name) : ClapTrap(name) 
 {
     _name = name;
     _hitPoints = 100;
@@ -21,12 +21,13 @@ ScavTrap::ScavTrap(const std::string &name)
 
 ScavTrap::ScavTrap(const ScavTrap &other) : ClapTrap(other)
 {
+    _name = other._name;
     std::cout << "\033[1;33m" << "ScavTrap copy constructor called for " << _name << std::endl;
 }
 
 ScavTrap &ScavTrap::operator=(const ScavTrap &other)
 {
-    std::cout << "\033[1;33m" << "ScavTrap copy assiggnment operator called\n";
+    std::cout << "\033[1;33m" << "ScavTrap copy assignment operator called\n";
     if (this != &other)
     {
         ClapTrap::operator=(other);
@@ -43,7 +44,7 @@ void ScavTrap::attack(const std::string &target)
 {
     if (_hitPoints <= 0 || _energyPoints <= 0)
     {
-        std::cout << "\033[1;33m" << "ScavTrap " << _name << "can't attack. No energy or hit points!" << std::endl;
+        std::cout << "\033[1;33m" << "ScavTrap " << _name << " can't attack. No energy or hit points!" << std::endl;
         return;
     }
     _energyPoints--;

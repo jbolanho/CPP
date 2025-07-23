@@ -27,12 +27,3 @@ int main()
     return 0;
     
 }
-// ClapTrap *bot = new FragTrap("Fraggy");
-
-// bot->attack("target00");
-// bot->beRepaired(5);
-// bot->takeDamage(20);
-
-// delete bot;
-
-// return 0;
