@@ -1,6 +1,6 @@
 #include "Animal.hpp"
 
-Animal::Animal()       //:type("Animal")
+Animal::Animal()
 {    
     std::cout << "\033[1;32m" << "[Animal] Constructor called\n";
 }
