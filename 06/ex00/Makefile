@@ -1,8 +1,8 @@
-NAME = 
+NAME = converter
 CC = c++
 FLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRC = main.cpp 
+SRC = main.cpp Scalar.cpp
 OBJ = $(SRC:.cpp=.o)
 
 all: $(NAME)
