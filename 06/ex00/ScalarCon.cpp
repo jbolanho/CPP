@@ -2,8 +2,7 @@
 
 void ScalarConverter::convert(std::string const &literal)
 {
-    std::cout << literal << std::endl;
-    if ((literal.size() == 1 && std::isprint(literal[0]) && !std::isdigit(literal[0])) ||
+      if ((literal.size() == 1 && std::isprint(literal[0]) && !std::isdigit(literal[0])) ||
         (literal.size() == 3 && literal[0] == '\'' && literal[2] == '\'')) 
     {
         char c = (literal.size() == 1) ? literal[0] : literal[1];
