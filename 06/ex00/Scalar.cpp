@@ -6,7 +6,12 @@ void ScalarConverter::convert(std::string const &literal)
     if ((literal.size() == 1 && std::isprint(literal[0]) && !std::isdigit(literal[0])) ||
         (literal.size() == 3 && literal[0] == '\'' && literal[2] == '\'')) 
     {
-        char c = (literal.size() == 1) ? literal[0] : literal[1];
+        char c;
+        if (literal.length() == 3)
+            c = literal[1];
+        else
+            c = literal[0];
+
         std::cout << "char: '" << c << "'\n";
         std::cout << "int: " << static_cast<int>(c) << "\n";
         std::cout << "float: " << static_cast<float>(c) << ".0f\n";
@@ -20,7 +25,8 @@ void ScalarConverter::convert(std::string const &literal)
 
     bool isFloat = (end && *end == 'f' && *(end+1) == '\0');
 
-    if ((end && *end != '\0' && !isFloat) || errno == ERANGE) {
+    if ((end && *end != '\0' && !isFloat) || errno == ERANGE) 
+    {
         std::cout << "char: impossible\n";
         std::cout << "int: impossible\n";
         std::cout << "float: impossible\n";
@@ -31,6 +37,8 @@ void ScalarConverter::convert(std::string const &literal)
     if (std::isnan(val) || val < 0 || val > 127)
         std::cout << "char: impossible\n";
     else if (!std::isprint(static_cast<int>(val)))
+        std::cout << "char: Non displayable\n";
+    else if (!(literal.size() == 3 && literal[0] == '\'' && literal[2] == '\''))
         std::cout << "char: Non displayable\n";
     else
         std::cout << "char: '" << static_cast<char>(val) << "'\n";

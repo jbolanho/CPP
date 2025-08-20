@@ -21,7 +21,8 @@ void ScalarConverter::convert(std::string const &literal)
         return;
     }
 
-    if ((literal.length() == 3 && literal[0] == '\'' && literal[2] == '\'') || literal.length() == 1)
+    if ((literal.length() == 3 && literal[0] == '\'' && literal[2] == '\'') || 
+        (literal.length() == 1 && std::isprint(literal[0]) && !std::isdigit(literal[0])))
     {
         char c;
         if (literal.length() == 3)
