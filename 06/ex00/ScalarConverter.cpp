@@ -2,27 +2,9 @@
 
 void ScalarConverter::convert(std::string const &literal)
 {
-    if (literal == "nan" || literal == "nanf" || literal == "+inf" || 
-        literal == "+inff" || literal == "-inf" || literal == "-inff")
-    {
-        std::cout << "char: impossible" << std::endl;
-        std::cout << "int: impossible" << std::endl;
-
-        if (literal[literal.size()-1] == 'f')
-        {
-            std::cout << "float: " << literal << std::endl;
-            std::cout << "double: " << literal.substr(0, literal.size()-1) << std::endl;
-        }
-        else
-        {
-            std::cout << "float: " << literal << "f" << std::endl;
-            std::cout << "double: " << literal << std::endl;
-        }
-        return;
-    }
-
-    if ((literal.length() == 3 && literal[0] == '\'' && literal[2] == '\'') || 
-        (literal.length() == 1 && std::isprint(literal[0]) && !std::isdigit(literal[0])))
+    std::cout << literal << std::endl;
+    if ((literal.size() == 1 && std::isprint(literal[0]) && !std::isdigit(literal[0])) ||
+        (literal.size() == 3 && literal[0] == '\'' && literal[2] == '\'')) 
     {
         char c;
         if (literal.length() == 3)
@@ -30,48 +12,48 @@ void ScalarConverter::convert(std::string const &literal)
         else
             c = literal[0];
 
-        std::cout << "char: '" << c << "'" << std::endl;
-        std::cout << "int: " << static_cast<int>(c) << std::endl;
-        std::cout << "float: " << static_cast<float>(c) << ".0f" << std::endl;
-        std::cout << "double: " << static_cast<double>(c) << ".0" << std::endl;
+        std::cout << "char: '" << c << "'\n";
+        std::cout << "int: " << static_cast<int>(c) << "\n";
+        std::cout << "float: " << static_cast<float>(c) << ".0f\n";
+        std::cout << "double: " << static_cast<double>(c) << ".0\n";
         return;
     }
 
-    char* end;
+    char* end = NULL;
     errno = 0;
     double val = std::strtod(literal.c_str(), &end);
 
     bool isFloat = (end && *end == 'f' && *(end+1) == '\0');
 
-    if ((end && *end != '\0' && !isFloat) || errno == ERANGE)
+    if ((end && *end != '\0' && !isFloat) || errno == ERANGE) 
     {
-        std::cout << "char: impossible" << std::endl;
-        std::cout << "int: impossible" << std::endl;
-        std::cout << "float: impossible" << std::endl;
-        std::cout << "double: impossible" << std::endl;
+        std::cout << "char: impossible\n";
+        std::cout << "int: impossible\n";
+        std::cout << "float: impossible\n";
+        std::cout << "double: impossible\n";
         return;
     }
 
-    if (val < 0 || val > 127)
-        std::cout << "char: impossible" << std::endl;
-    else if (!isprint(static_cast<int>(val)))
-        std::cout << "char: Non displayable" << std::endl;
+    if (std::isnan(val) || val < 0 || val > 127)
+        std::cout << "char: impossible\n";
+    else if (!std::isprint(static_cast<int>(val)))
+        std::cout << "char: Non displayable\n";
+    else if (!(literal.size() == 3 && literal[0] == '\'' && literal[2] == '\''))
+        std::cout << "char: Non displayable\n";
     else
-        std::cout << "char: '" << static_cast<char>(val) << "'" << std::endl;
+        std::cout << "char: '" << static_cast<char>(val) << "'\n";
 
-
-    if (val < INT_MIN || val > INT_MAX)
-        std::cout << "int: impossible" << std::endl;
-    
+    if (std::isnan(val) || val < INT_MIN || val > INT_MAX)
+        std::cout << "int: impossible\n";
     else
-        std::cout << "int: " << static_cast<int>(val) << std::endl;
+        std::cout << "int: " << static_cast<int>(val) << "\n";
 
     {
         float f = static_cast<float>(val);
         std::cout << "float: " << f;
         if (f == static_cast<int>(f))
             std::cout << ".0";
-        std::cout << "f" << std::endl;
+        std::cout << "f\n";
     }
 
     {
@@ -79,7 +61,6 @@ void ScalarConverter::convert(std::string const &literal)
         std::cout << "double: " << d;
         if (d == static_cast<int>(d))
             std::cout << ".0";
-        std::cout << std::endl;
-
+        std::cout << "\n";
     }
 }
