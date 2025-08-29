@@ -18,7 +18,8 @@
 
 
 
-int main() {
+int main() 
+{
     try {
         std::cout << " \n \033[1;32m ***Subject test*** \033[0m" << std::endl;
         Span sp = Span(5);
@@ -41,7 +42,9 @@ int main() {
         std::cout << "Big shortest span: " << bigSpan.shortestSpan() << std::endl;
         std::cout << "Big longest span: " << bigSpan.longestSpan() << std::endl;
 
-    } catch (const std::exception& e) {
+    } 
+    catch (const std::exception& e) 
+    {
         std::cerr << "Erro: " << e.what() << std::endl;
     }
 }
