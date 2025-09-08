@@ -31,7 +31,6 @@ AForm& AForm::operator=(const AForm& other)
 }
 
 
-
 const char *AForm::GradeTooLowException::what() const throw()
 {
 	return "AForm grade too low!";

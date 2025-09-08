@@ -1,7 +1,7 @@
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
 
-
+Bureaucrat::Bureaucrat() {}
 
 Bureaucrat::Bureaucrat(const std::string &name, int grade) : name(name)
 {
@@ -12,8 +12,18 @@ Bureaucrat::Bureaucrat(const std::string &name, int grade) : name(name)
     this->grade = grade;
 }
 
-Bureaucrat::~Bureaucrat() {}
+Bureaucrat::Bureaucrat(const Bureaucrat &other) : name(other.name) {}
 
+Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other) 
+{
+    if(this != &other)
+    {
+        this->grade = other.grade;
+    }
+    return *this;
+}
+
+Bureaucrat::~Bureaucrat() {}
 
 const std::string& Bureaucrat::getName() const
 {
